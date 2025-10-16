@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { memo } from 'react';
 
@@ -17,33 +17,29 @@ export const SessionList = memo(function SessionList({ onRefresh }: SessionListP
   const setSelectedId = useSessionStore((state) => state.setSelectedId);
 
   return (
-    <aside className="flex h-full w-full max-w-full flex-col border-b border-neutral-200 bg-neutral-50/60 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-900/30 md:w-[360px] md:flex-shrink-0 md:border-b-0 md:border-r">
-      <div className="border-none bg-transparent px-6 pb-4 pt-6">
-        <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">Sessions</h2>
-        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-          Browse Codex CLI sessions on this machine.
-        </p>
-        <div className="mt-4">
+    <aside className='flex h-full w-full max-w-full flex-col border-b border-neutral-200 bg-neutral-50 md:max-w-sm md:flex-shrink-0 md:border-b-0 md:border-r'>
+      <div className='px-6 pb-4 pt-6'>
+        <h2 className='text-base font-semibold text-neutral-900'>Sessions</h2>
+        <p className='mt-1 text-sm text-neutral-500'>Browse Codex CLI sessions on this machine.</p>
+        <div className='mt-4'>
           <button
-            type="button"
+            type='button'
             onClick={onRefresh}
             disabled={loading}
-            className="inline-flex w-full items-center justify-center rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-500 disabled:cursor-not-allowed disabled:opacity-70 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-900 dark:focus-visible:outline-neutral-600 sm:w-auto"
+            className='inline-flex w-full items-center justify-center rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-500 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto'
           >
             {loading ? 'Refreshing...' : 'Refresh'}
           </button>
         </div>
       </div>
-      <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
-      {error ? (
-        <div className="px-6 py-3 text-xs text-red-600 dark:text-red-400">{error}</div>
-      ) : null}
+      <div className='h-px bg-neutral-200' />
+      {error ? <div className='px-6 py-3 text-xs text-red-600'>{error}</div> : null}
 
-      <div className="flex-1 overflow-y-auto px-4 pb-4">
+      <div className='flex-1 overflow-y-auto px-4 pb-4'>
         {sessions.length === 0 ? (
           <EmptyState loading={loading} />
         ) : (
-          <ul className="grid gap-3">
+          <ul className='grid gap-3'>
             {sessions.map((session) => (
               <li key={session.id}>
                 <SessionListRow
@@ -62,7 +58,7 @@ export const SessionList = memo(function SessionList({ onRefresh }: SessionListP
 
 function EmptyState({ loading }: { loading: boolean }) {
   return (
-    <div className="rounded-xl border border-dashed border-neutral-200 px-6 py-14 text-center text-sm text-neutral-500 dark:border-neutral-700 dark:text-neutral-400">
+    <div className='rounded-xl border border-dashed border-neutral-200 px-6 py-14 text-center text-sm text-neutral-500'>
       {loading ? 'Loading sessions...' : 'No sessions found. Run Codex CLI to create sessions.'}
     </div>
   );
@@ -84,25 +80,23 @@ const SessionListRow = memo(function SessionListRow({
   const timestampLabel = formatKstDateTime(session.createdAt);
   return (
     <button
-      type="button"
+      type='button'
       onClick={() => onSelect(session.id)}
       className={[
         'h-auto w-full items-start rounded-xl border px-4 py-4 text-left transition-all',
         active
-          ? 'border-neutral-900 bg-neutral-200/60 shadow-sm dark:border-neutral-200 dark:bg-neutral-800/60'
-          : 'border-transparent bg-white hover:border-neutral-300 hover:bg-neutral-100 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800/60',
+          ? 'border-neutral-900 bg-neutral-200/60 shadow-sm'
+          : 'border-transparent bg-white hover:border-neutral-300 hover:bg-neutral-100',
       ].join(' ')}
     >
-      <div className="w-full space-y-3 text-left">
-        <div className="flex flex-col gap-1 text-xs text-neutral-500 dark:text-neutral-400">
-          <span className="font-medium text-neutral-600 dark:text-neutral-300 md:text-sm">{timestampLabel}</span>
-          <span className="font-mono text-sm font-semibold text-neutral-900 dark:text-neutral-100 break-all">
-            {displayId}
-          </span>
-          <span className="truncate text-xs md:text-[13px]">{session.cwd}</span>
+      <div className='w-full space-y-3 text-left'>
+        <div className='flex flex-col gap-1 text-xs text-neutral-500'>
+          <span className='font-medium text-neutral-600 md:text-sm'>{timestampLabel}</span>
+          <span className='break-all font-mono text-sm font-semibold text-neutral-900'>{displayId}</span>
+          <span className='truncate text-xs md:text-[13px]'>{session.cwd}</span>
         </div>
-        <div className="flex w-full flex-wrap items-center justify-between gap-2 text-xs text-neutral-500 dark:text-neutral-400">
-          <span className="font-medium">{session.cliVersion}</span>
+        <div className='flex w-full flex-wrap items-center justify-between gap-2 text-xs text-neutral-500'>
+          <span className='font-medium'>{session.cliVersion}</span>
           <span
             className={[
               'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide',
@@ -120,20 +114,11 @@ const SessionListRow = memo(function SessionListRow({
 function getStatusBadge(status: SessionListItem['status']) {
   switch (status) {
     case 'corrupted':
-      return {
-        label: 'Corrupted',
-        className: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-200',
-      };
+      return { label: 'Corrupted', className: 'bg-red-100 text-red-700' };
     case 'missing':
-      return {
-        label: 'Missing',
-        className: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200',
-      };
+      return { label: 'Missing', className: 'bg-amber-100 text-amber-700' };
     default:
-      return {
-        label: 'Ready',
-        className: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200',
-      };
+      return { label: 'Ready', className: 'bg-emerald-100 text-emerald-700' };
   }
 }
 

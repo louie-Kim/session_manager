@@ -119,7 +119,7 @@ export function SessionManager() {
   }, [loadSessions]);
 
   return (
-    <div className="relative flex h-[calc(100vh-4rem)] min-h-[540px] flex-col overflow-hidden rounded-3xl border border-neutral-200/80 bg-white/80 shadow-lg backdrop-blur-sm transition dark:border-neutral-800/70 dark:bg-neutral-900/60 md:flex-row md:gap-8 md:p-6">
+    <div className="relative flex h-[calc(100vh-4rem)] min-h-[540px] flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-lg md:flex-row md:gap-8 md:p-6">
       <SessionList onRefresh={() => loadSessions(true)} />
       <SessionDetailPanel />
       <ToastViewport />
