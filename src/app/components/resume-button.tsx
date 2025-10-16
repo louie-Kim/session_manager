@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import { requestResumeSession } from '@/lib/session-client';
 import { pushToast } from '@/lib/toast';
-import { Button } from '@/components/ui/button';
-
 interface ResumeButtonProps {
   sessionId: string;
   sessionPath: string;
@@ -81,16 +79,15 @@ export function ResumeButton({ sessionId, sessionPath, disabled }: ResumeButtonP
   };
 
   return (
-    <Button
+    <button
       type="button"
+      className="inline-flex min-w-[160px] items-center justify-center rounded-lg border border-neutral-300 bg-neutral-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 disabled:cursor-not-allowed disabled:opacity-70 dark:border-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200 dark:focus-visible:outline-neutral-200"
       onClick={handleResume}
       title="Launch a CMD window and run codex resume <session_id>. Always verify /status output."
-      disabled={disabled}
-      loading={loading}
-      size="sm"
-      className="min-w-[160px]"
+      disabled={disabled || loading}
+      data-loading={loading ? 'true' : undefined}
     >
       {loading ? 'Launching...' : 'Resume Session'}
-    </Button>
+    </button>
   );
 }

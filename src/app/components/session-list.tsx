@@ -2,14 +2,8 @@
 
 import { memo } from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import { useSessionStore } from '@/lib/stores/session-store';
 import type { SessionListItem } from '@/lib/types';
-import { cn } from '@/lib/utils';
 
 interface SessionListProps {
   onRefresh: () => void;
@@ -24,30 +18,28 @@ export const SessionList = memo(function SessionList({ onRefresh }: SessionListP
 
   return (
     <aside className="flex h-full w-full max-w-full flex-col border-b border-neutral-200 bg-neutral-50/60 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-900/30 md:w-[360px] md:flex-shrink-0 md:border-b-0 md:border-r">
-      <Card className="border-none bg-transparent shadow-none dark:bg-transparent">
-        <CardHeader className="px-6 pb-1 pt-6">
-          <CardTitle>Sessions</CardTitle>
-          <CardDescription>Browse Codex CLI sessions on this machine.</CardDescription>
-        </CardHeader>
-        <CardContent className="px-6 pb-4 pt-2">
-          <Button
+      <div className="border-none bg-transparent px-6 pb-4 pt-6">
+        <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">Sessions</h2>
+        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+          Browse Codex CLI sessions on this machine.
+        </p>
+        <div className="mt-4">
+          <button
             type="button"
-            size="sm"
-            variant="outline"
             onClick={onRefresh}
-            loading={loading}
-            className="w-full sm:w-auto"
+            disabled={loading}
+            className="inline-flex w-full items-center justify-center rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-500 disabled:cursor-not-allowed disabled:opacity-70 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-900 dark:focus-visible:outline-neutral-600 sm:w-auto"
           >
             {loading ? 'Refreshing...' : 'Refresh'}
-          </Button>
-        </CardContent>
-      </Card>
-      <Separator />
+          </button>
+        </div>
+      </div>
+      <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
       {error ? (
         <div className="px-6 py-3 text-xs text-red-600 dark:text-red-400">{error}</div>
       ) : null}
 
-      <ScrollArea className="flex-1 px-4 pb-4">
+      <div className="flex-1 overflow-y-auto px-4 pb-4">
         {sessions.length === 0 ? (
           <EmptyState loading={loading} />
         ) : (
@@ -63,7 +55,7 @@ export const SessionList = memo(function SessionList({ onRefresh }: SessionListP
             ))}
           </ul>
         )}
-      </ScrollArea>
+      </div>
     </aside>
   );
 });
@@ -91,16 +83,15 @@ const SessionListRow = memo(function SessionListRow({
   const displayId = session.id;
   const timestampLabel = formatKstDateTime(session.createdAt);
   return (
-    <Button
+    <button
       type="button"
-      variant={active ? 'secondary' : 'ghost'}
       onClick={() => onSelect(session.id)}
-      className={cn(
+      className={[
         'h-auto w-full items-start rounded-xl border px-4 py-4 text-left transition-all',
         active
-          ? 'border-neutral-900 shadow-sm dark:border-neutral-200'
-          : 'border-transparent hover:border-neutral-300 dark:hover:border-neutral-700',
-      )}
+          ? 'border-neutral-900 bg-neutral-200/60 shadow-sm dark:border-neutral-200 dark:bg-neutral-800/60'
+          : 'border-transparent bg-white hover:border-neutral-300 hover:bg-neutral-100 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800/60',
+      ].join(' ')}
     >
       <div className="w-full space-y-3 text-left">
         <div className="flex flex-col gap-1 text-xs text-neutral-500 dark:text-neutral-400">
@@ -112,23 +103,37 @@ const SessionListRow = memo(function SessionListRow({
         </div>
         <div className="flex w-full flex-wrap items-center justify-between gap-2 text-xs text-neutral-500 dark:text-neutral-400">
           <span className="font-medium">{session.cliVersion}</span>
-          <Badge variant={badge.variant} className="text-[11px]">
+          <span
+            className={[
+              'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide',
+              badge.className,
+            ].join(' ')}
+          >
             {badge.label}
-          </Badge>
+          </span>
         </div>
       </div>
-    </Button>
+    </button>
   );
 });
 
 function getStatusBadge(status: SessionListItem['status']) {
   switch (status) {
     case 'corrupted':
-      return { label: 'Corrupted', variant: 'destructive' as const };
+      return {
+        label: 'Corrupted',
+        className: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-200',
+      };
     case 'missing':
-      return { label: 'Missing', variant: 'warning' as const };
+      return {
+        label: 'Missing',
+        className: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200',
+      };
     default:
-      return { label: 'Ready', variant: 'success' as const };
+      return {
+        label: 'Ready',
+        className: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200',
+      };
   }
 }
 
