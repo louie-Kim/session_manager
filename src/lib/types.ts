@@ -66,3 +66,17 @@ export interface DeleteSessionResponse {
     message?: string;
   };
 }
+
+export type SessionConversationMessageType = 'user_message' | 'agent_message' | 'agent_reasoning';
+
+export interface SessionConversationEntry {
+  timestamp: string;
+  type: SessionConversationMessageType;
+  text: string;
+}
+
+export interface SessionConversationTurn {
+  user?: SessionConversationEntry;
+  reasonings: SessionConversationEntry[];
+  agent?: SessionConversationEntry;
+}

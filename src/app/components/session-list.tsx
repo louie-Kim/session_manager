@@ -35,7 +35,7 @@ export const SessionList = memo(function SessionList({ onRefresh }: SessionListP
       <div className='h-px bg-neutral-200' />
       {error ? <div className='px-6 py-3 text-xs text-red-600'>{error}</div> : null}
 
-      <div className='flex-1 overflow-y-auto px-4 pb-4'>
+      <div className='flex-1 overflow-y-auto px-4 py-4 pb-4'>
         {sessions.length === 0 ? (
           <EmptyState loading={loading} />
         ) : (
