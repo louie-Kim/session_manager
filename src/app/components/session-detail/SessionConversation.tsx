@@ -13,6 +13,7 @@ export function SessionConversation({ sessionPath }: SessionConversationProps) {
   const [turns, setTurns] = useState<SessionConversationTurn[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     if (!sessionPath) {
@@ -97,8 +98,17 @@ export function SessionConversation({ sessionPath }: SessionConversationProps) {
 
   return (
     <section>
-      <SectionTitle>Conversation</SectionTitle>
-      {loading ? (
+      <div className="flex items-center justify-between">
+        <SectionTitle>Conversation</SectionTitle>
+        <button
+          type="button"
+          onClick={() => setCollapsed((previous) => !previous)}
+          className="text-sm font-medium text-neutral-600 underline transition hover:text-neutral-900"
+        >
+          {collapsed ? 'Show' : 'Hide'}
+        </button>
+      </div>
+      {collapsed ? null : loading ? (
         <p className="mt-3 text-sm text-neutral-500">Loading conversation...</p>
       ) : error ? (
         <p className="mt-3 text-sm text-red-600">{error}</p>

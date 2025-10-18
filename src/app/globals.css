@@ -12,6 +12,101 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html.dark,
+html[data-theme='dark'] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  color-scheme: dark;
+}
+
+html.dark body,
+html[data-theme='dark'] body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+html.dark .bg-white,
+html[data-theme='dark'] .bg-white {
+  background-color: #1f2933 !important;
+}
+
+html.dark .bg-neutral-50,
+html[data-theme='dark'] .bg-neutral-50 {
+  background-color: #1a1a1f !important;
+}
+
+html.dark .bg-neutral-100,
+html[data-theme='dark'] .bg-neutral-100 {
+  background-color: #202127 !important;
+}
+
+html.dark .bg-neutral-200,
+html[data-theme='dark'] .bg-neutral-200,
+html.dark .bg-neutral-200\/60,
+html[data-theme='dark'] .bg-neutral-200\/60 {
+  background-color: #26272e !important;
+}
+
+html.dark .bg-amber-50,
+html[data-theme='dark'] .bg-amber-50 {
+  background-color: #3b2f1b !important;
+}
+
+html.dark .bg-red-50,
+html[data-theme='dark'] .bg-red-50 {
+  background-color: #3a1f1f !important;
+}
+
+html.dark .text-neutral-900,
+html[data-theme='dark'] .text-neutral-900 {
+  color: #f4f4f5 !important;
+}
+
+html.dark .text-neutral-800,
+html[data-theme='dark'] .text-neutral-800 {
+  color: #e4e4e7 !important;
+}
+
+html.dark .text-neutral-700,
+html[data-theme='dark'] .text-neutral-700 {
+  color: #d4d4d8 !important;
+}
+
+html.dark .text-neutral-600,
+html[data-theme='dark'] .text-neutral-600 {
+  color: #c0c0c7 !important;
+}
+
+html.dark .text-neutral-500,
+html[data-theme='dark'] .text-neutral-500 {
+  color: #a6a6ae !important;
+}
+
+html.dark .text-neutral-400,
+html[data-theme='dark'] .text-neutral-400 {
+  color: #8f90a4 !important;
+}
+
+html.dark .text-neutral-300,
+html[data-theme='dark'] .text-neutral-300 {
+  color: #9ca3af !important;
+}
+
+html.dark .border-neutral-200,
+html[data-theme='dark'] .border-neutral-200 {
+  border-color: #3f3f46 !important;
+}
+
+html.dark .border-neutral-300,
+html[data-theme='dark'] .border-neutral-300 {
+  border-color: #52525b !important;
+}
+
+html.dark .shadow-lg,
+html[data-theme='dark'] .shadow-lg {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

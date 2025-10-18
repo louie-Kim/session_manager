@@ -18,7 +18,7 @@ export const SessionList = memo(function SessionList({ onRefresh }: SessionListP
 
   return (
     <aside className='flex h-full w-full max-w-full flex-col border-b border-neutral-200 bg-neutral-50 md:max-w-sm md:flex-shrink-0 md:border-b-0 md:border-r'>
-      <div className='px-6 pb-4 pt-6'>
+      <div className='px-6 pb-4 pt-6 ring-1 rounded-t-2xl overflow-hidden'>
         <h2 className='text-base font-semibold text-neutral-900'>Sessions</h2>
         <p className='mt-1 text-sm text-neutral-500'>Browse Codex CLI sessions on this machine.</p>
         <div className='mt-4'>
