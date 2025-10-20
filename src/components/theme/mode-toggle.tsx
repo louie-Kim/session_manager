@@ -22,7 +22,6 @@ export function ModeToggle() {
    */
   const handleToggle = useCallback(() => {
     const next = resolvedTheme === "dark" ? "light" : "dark";
-    console.log("테마 변경됨!!!!!!!!!!!");
     setTheme(next);
   }, [resolvedTheme, setTheme]);
 
